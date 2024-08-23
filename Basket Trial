@@ -1,0 +1,62 @@
+A basket clinical trial involves testing a single drug or device across multiple subpopulations, which are defined by specific biomarkers, genetic mutations, or disease subtypes. The goal is to evaluate the efficacy of the treatment across various subgroups
+while potentially pooling data to enhance efficiency. 
+
+Basket Clinical Trial Plan
+1. Study Objective
+- Primary Objective: Assess the efficacy and safety of a single drug or device in multiple different subpopulations.
+- Secondary Objective: Explore whether the efficacy of the drug/device varies across these subpopulations and identify potential responders.
+
+2. Trial Design
+- Basket Design: A Phase IV basket trial, where each subpopulation forms a different "basket", but they share the same treatment.
+- Subpopulation: Based on distinct genetic mutations, biomarkers, or disease subtypes (e.g., cancers with different mutations).
+- Study Arms: Each subpopulation will receive the same drug/device under investigation.
+Design Choices:
+- Independent Arm Design: Each subpopulation will be analyzed independently.
+- Pooling with Hierarchical Modeling: Allows sharing of information across subpopulations while keeping subpopulation-specific estimates.
+
+3. Endpoints
+- Primary Endpoint: Proportion of patients achieving a pre-specified outcome (e.g., response rate, progression-free survival) within each subpopulation.
+- Secondary Endpoints: 
+-- Overall Survival(OS)
+-- Disease control rate
+-- Adverse events/safety
+
+4. Sample Size Calculation
+The sample size depends on the primary outcome (e.g., response rate) and can differ across subpopulations. For simplicity, assume you're targeting a binary outcome (response rate) for each population.
+- Input Parameters
+-- Type I error (alpha): 0.05 (two-sided) or 0.025 (one-sided).
+-- Power (1-beta): 80% or 90%.
+-- Expected Response Rate: Let's say the response rate for each subpopulation is assumed to be 30%.
+-- Minimum Clinically Important Difference (MCID): Define the smallest response rate difference that would be clinically meaningful (e.g., 15%).
+Formula for Sample Size Calculation (Binary Outcome, Single Arm):
+For each subpopulation, you can use the following formula based on normal approximation for comparing proportions:
+n = (((Z1-alpha/2 + Z1-beta)/delta)^2)*p(1-p)
+where Z1-alpha/2 is the critical value for a two-sided confidence interval (for alpha = 0.05, it is 1.96).
+Z1-beta is the critical value for power (for 80% power, it is 0.84).
+p is the expected response rate (e.g., 0.30).
+delta is the minimum clinically important difference (e.g., 0.15).
+
+Example R code of sample size calculation for each population:
+p1 <- 0.30 # Expected response rate
+delta <- 0.15 # Minimum Clinically Important Difference
+alpha <- 0.05 # Type I error 
+power <- 0.80 # Desired Power
+
+Z_alpha <- qnorm(1-alpha/2) # Z value for 95% confidence 
+Z_beta <- qnorm(power) # Z value for 80% power
+n <- ((Z_alpha + Z_beta)/delta)^2*(p1*(1-p1))
+print(ceiling(n)) 
+
+Assuming the result is around 60 patients per subpopulation, you would require 240 patients total across four subpopulations.
+
+5. Randomization and Allocation
+Since this is a basket trial with one treatment arm, randomization may not be needed unless there is a control group. If controls are included (e.g., placebo or standard-of-care), randomization should be stratified by subpopulation.
+
+6. Statistical Analysis Plan
+
+
+
+
+
+
+
