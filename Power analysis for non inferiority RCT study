@@ -1,0 +1,64 @@
+In a randomized controlled trial (RCT) designed to test for non-inferiority, the goal is to demonstrate that a new treatment is not worse than a standard treatment by more than a prespecified margin,
+known as the non-inferiority margin (delta). The margin is a key component in non-inferiority trials, and its selection must be based on both statistical and clinical reasoning.
+
+Steps to Determine the Non-Inferiority Threshold 
+1. Define the Standard of Care:
+- Identify the exisiting treatment (the "control" group) that will be compared to the new treatment (the "test" group).
+2. Determine the Clinically Relevant Margin (delta)
+- Clinical Relevance: The non-inferiority margin must represent a clinically acceptable difference. It is typically set based on expert opinion, clinical judgment, or prior research.
+- Historical Evidence: Often, previous placebo-controlled trials are used to determine the margin, ensuring the new treatment maintains a sufficient proportion of the efficacy of the standard treatment.
+3. Statistical Power and Type I Error
+- Choose the significance level (alpha), typically set at 0.05 (one-sided).
+- Choose the desired power (1-beta), typically set at 0.80 or 0.90.
+4. Calculate Non-Inferiority Margin (alpha)
+The margin is often expressed as a risk difference, relative risk, or hazard ratio, depending on the endpoint of interest.
+
+Example 1: Non-Inferiority Margin for Binary Outcomes
+If you are comparing two treatments based on a binary outcome (e.g., success vs. failure), the non-inferiority margin (delta) is often specified in terms of the difference in porportions between the control
+and treatment groups.
+- Key Formulas
+-- Risk Difference (RD): RD = Pcontrol - Ptreatment, where Pcontrol and Ptreatment are the success rates in the control and treatment groups, respectively.
+The non-inferiority threshold (delta) could be determined based on the expected success rate in the control group and what is considered an acceptable level of inferiority for the new treatment.
+- Example: Let's say the success rate for the control group is expected to be 85%, and you want to ensure that the new treatment is no more than 5% worse (delta = 0.05): Non-inferiority margin = 0.85 - 0.80 = 0.05
+
+Example 2: Non-Inferiority Margin for Time-To-Event Outcomes (Hazard Ratio)
+For time-to-event outcomes (e.g., survival), non-inferiority is typically assessed using the hazard ratio (HR) between the two treatments.
+- Hazard Ratio (HR): The non-inferiority threshold is often set based on what is considered an acceptable hazard ratio: H0: HR >= delta (non-inferiority hypothesis)
+A commonly used non-inferiority margin for hazard ratios is 1.3 or 1.2, indicating that the new treatment should not increase the hazard by more than 30% or 20% compared to the control treatment.
+- Example: If the control treatment has a hazard ratio (HR) of 1.0 (no difference), and you set a non-inferiority margin of 1.3, then the new treatment is considered non-inferior as long as the hazard ratio is less than 1.3.
+
+Example 3: Non-Inferiority Margin for Continuous Outcomes 
+For continuous outcomes (e.g., blood pressure reduction, cholesterol levels), the non-inferiority margin is often specified in terms of the difference in means between the two groups. Delta = MUcontrol - MUtreatment
+where MUcontrol and MUtreatment are the mean outcomes for the control and treatment groups, respectively. The margin should represent the smallest difference in the outcome that would still be considered clinically acceptable.
+- Example: Let's say the mean reduction in blood pressure in the control group is 10 mmHg, and you consider a reduction of at least 8 mmHg (delta = 2 mmHg) for the new treatment to be non-inferior: Non-inferiority margin = 10 - 8 = 2 mmHg.
+
+Step-by-Step Process to Perform Non-Inferiority Calculations in RCTs
+Step1: Define the Endpoint and Metric
+- Binary outcome: Risk difference, relative risk, or odds ratio
+- Time-to-event: Hazard ratio
+- Continuous outcome: Difference in means.
+Step2: Select the Non-Inferiority Margin (delta)
+- Review clinical and statistical evidence
+- Consider the minimum acceptable difference or ratio
+Step3: Set the Type I Error (alpha) and Power (1-beta)
+- Common choices are alpha = 0.05 and power = 0.80.
+Step 4: Perform the Sample Size Calculation
+Use statistical software (like R or SAS) to perform the sample size calculation using the chosen margin.
+
+Example code for binary outcomes in R:
+install.packages("TrialSize")
+library(TrialSize)
+
+p1 <- 0.85 # Proportion in control group
+p2 <- 0.80 # Proportion in treatment group
+delta <- 0.05 # Non-inferiority margin
+alpha <- 0.05 # Type I error (one-sided)
+power <- 0.80 # desired power
+
+n <- Noninf.binary(alpha=alpha, beta=1-power, p1=p1, p2=p2, delta=delta)
+print(n)
+
+The non-inferiority margin is determined based on clinical relevance and statistical considerations. It is important to review clinical data and expert opinions to set an appropriate threshold, ensuring that the new treatment provides a similar benefit 
+to the standard treatment without a meaningful loss of efficacy.
+
+
